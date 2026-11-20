@@ -1,0 +1,189 @@
+@import "tailwindcss";
+@import "@fontsource-variable/manrope";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@theme {
+  --font-sans: "Manrope Variable", "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-ink: #0b0f17;
+  --color-muted: #3d4859;
+  --color-azure: #0071e3;
+}
+
+@layer base {
+  html {
+    background-color: #dce6f2;
+    color: #0b0f17;
+    font-family: var(--font-sans);
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: #dce6f2;
+    color: #0b0f17;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 3px;
+  }
+}
+
+/*
+ * Web frosted-glass / Liquid Glass approximation.
+ * Apple Liquid Glass is an Apple-platform native material; this is an honest
+ * web approximation using layered backdrop-filter, specular bevels, and light caustics.
+ */
+.liquid-glass-web-approx {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.68);
+  background:
+    linear-gradient(
+      138deg,
+      rgb(255 255 255 / 0.62) 0%,
+      rgb(255 255 255 / 0.24) 48%,
+      rgb(255 255 255 / 0.44) 100%
+    ),
+    rgb(245 249 255 / 0.34);
+  backdrop-filter: blur(28px) saturate(195%) brightness(1.06) contrast(1.03);
+  -webkit-backdrop-filter: blur(28px) saturate(195%) brightness(1.06) contrast(1.03);
+  box-shadow:
+    inset 0 1.5px 0 rgb(255 255 255 / 0.9),
+    inset 0 -1px 0 rgb(255 255 255 / 0.32),
+    inset 1px 0 0 rgb(255 255 255 / 0.42),
+    0 24px 64px rgb(16 34 62 / 0.14),
+    0 4px 16px rgb(16 34 62 / 0.06);
+}
+
+.liquid-glass-web-approx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(62% 42% at 18% 0%, rgb(255 255 255 / 0.72), transparent 58%),
+    linear-gradient(105deg, rgb(255 255 255 / 0.22), transparent 44%, rgb(255 255 255 / 0.16));
+  pointer-events: none;
+}
+
+.liquid-glass-web-approx::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgb(255 255 255 / 0.26);
+  pointer-events: none;
+}
+
+/* Clearer pill material for fixed floating navigation and floating dock */
+.liquid-glass-pill-approx {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.74);
+  background:
+    linear-gradient(140deg, rgb(255 255 255 / 0.72), rgb(255 255 255 / 0.32)),
+    rgb(246 250 255 / 0.42);
+  backdrop-filter: blur(32px) saturate(210%) brightness(1.05);
+  -webkit-backdrop-filter: blur(32px) saturate(210%) brightness(1.05);
+  box-shadow:
+    inset 0 1.5px 0 rgb(255 255 255 / 0.95),
+    inset 0 -1px 0 rgb(255 255 255 / 0.38),
+    0 18px 46px rgb(14 32 58 / 0.16),
+    0 2px 10px rgb(14 32 58 / 0.08);
+}
+
+.liquid-glass-pill-approx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(50% 60% at 22% 0%, rgb(255 255 255 / 0.78), transparent 60%);
+  pointer-events: none;
+}
+
+/* Tactile glass button surface */
+.liquid-glass-btn-approx {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgb(255 255 255 / 0.75);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.74), rgb(255 255 255 / 0.42)),
+    rgb(255 255 255 / 0.25);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.92),
+    0 10px 26px rgb(16 34 62 / 0.12);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass-web-approx,
+  .liquid-glass-pill-approx,
+  .liquid-glass-btn-approx {
+    background: rgb(248 250 253 / 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Custom range slider styled as an optical glass capsule */
+input[type="range"].glass-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].glass-slider::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(0 113 227 / 0.22), rgb(0 113 227 / 0.65));
+  box-shadow: inset 0 1px 2px rgb(11 15 23 / 0.16);
+}
+
+input[type="range"].glass-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 26px;
+  width: 26px;
+  margin-top: -8px;
+  border-radius: 9999px;
+  background: linear-gradient(160deg, #ffffff 0%, #eaf2fc 100%);
+  border: 1px solid rgb(255 255 255 / 0.95);
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 4px 14px rgb(0 113 227 / 0.34),
+    0 1px 3px rgb(11 15 23 / 0.22);
+  transition: transform 220ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+input[type="range"].glass-slider::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+}
+
+input[type="range"].glass-slider::-moz-range-track {
+  height: 10px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(0 113 227 / 0.22), rgb(0 113 227 / 0.65));
+}
+
+input[type="range"].glass-slider::-moz-range-thumb {
+  height: 26px;
+  width: 26px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid rgb(255 255 255 / 0.95);
+  box-shadow: 0 4px 14px rgb(0 113 227 / 0.34);
+}
